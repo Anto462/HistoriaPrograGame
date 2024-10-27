@@ -1,0 +1,31 @@
+Ada - primer algoritmo
+Charles - idea de primer computador
+Ala turning - maquina que puede ser reprogramable
+Claude shanon - Todo puede resolverse con 0 y 1
+----
+Las damas del eniac - maquina de eniac
+Tarjetas perforadas - Pogramacion en 0 y 1
+-----
+Kathleen Booth - Crea Ensamblador
+Grace hooper - Primer compilador
+---------
+john backus - Crea fortran
+Grace hooper - Crea cobol
+John McCarthy - Crea Lisp
+---------
+Ole Johan Dahl y Kristen Nygaard - Crean simula
+-----
+John George Kemeny - Crea basic
+ken thompson - Crea B
+Dennis Ritchie - Crea C
+Niklaus Wirth - Crea Pascal
+-----------
+edgar codd - Teoria base de datos relacionales
+Jean David Ichbiah - Crea Ada
+Bjarne Stroustrup - Crea C++
+Larry Wall- Crea Perl
+Guido van Rossum - Crea python
+Rasmus Lerdorf  - Crea php
+Sun Microsystems - Crea Java
+brendan eich - Crea JavaScript
+Robert Griesemer, Rob Pike y Ken Thompson - Crean GO
