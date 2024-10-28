@@ -1,6 +1,6 @@
 Ada - primer algoritmo
-Charles - idea de primer computador
-Ala turning - maquina que puede ser reprogramable
+Charles Babbage - idea de primer computador
+Alan turning - maquina que puede ser reprogramable
 Claude shanon - Todo puede resolverse con 0 y 1
 ----
 Las damas del eniac - maquina de eniac
