@@ -463,7 +463,7 @@ var AnimeMotion = defineObject(BaseObject,
 			animeCoordinates.yBase = this._yBase[i] - yScroll;
 			animeCoordinates.dx = this._xOffset;
 			animeCoordinates.dy = this._yOffset;
-			if (spriteType === SpriteType.KEY || spriteType === SpriteType.OPTION) {	
+			if (spriteType === SpriteType.KEY || spriteType === SpriteType.OPTION) {
 				this._animeSimple.drawMotion(this._frameIndex, i, this._animeRenderParam, animeCoordinates);
 			}
 			else {
@@ -493,8 +493,14 @@ var AnimeMotion = defineObject(BaseObject,
 		srcHeight = image.getHeight();
 		
 		if (this._isBackgroundAnimeScaling()) {
-			destWidth = RealBattleArea.WIDTH;
-			destHeight = RealBattleArea.HEIGHT;
+			if (AttackControl.isAttack()) {
+				destWidth = RealBattleArea.WIDTH;
+				destHeight = RealBattleArea.HEIGHT;
+			}
+			else {
+				destWidth = root.getGameAreaWidth();
+				destHeight = root.getGameAreaHeight();
+			}
 			x = 0;
 			y = 0;
 		}
@@ -517,7 +523,7 @@ var AnimeMotion = defineObject(BaseObject,
 		var isContinue;
 		var count = this.getFrameCount();
 		
-		if (this._frameIndex + 1 < count) {		
+		if (this._frameIndex + 1 < count) {
 			this._frameIndex++;
 			this._setFrame(this._frameIndex);
 			isContinue = true;

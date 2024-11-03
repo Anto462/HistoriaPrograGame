@@ -191,6 +191,11 @@ var StateControl = {
 				continue;
 			}
 			
+			// Whether the "Guard State" of an item may be checked.
+			if (!this._IsGuardStateCheckEnabled(unit, targetUnit, state, item)) {
+				continue;
+			}
+			
 			// Check the "Guard State" of the item.
 			stateGroup = item.getStateGroup();
 			if (this.isStateGroupEnabled(state, stateGroup)) {
@@ -252,6 +257,12 @@ var StateControl = {
 			}
 		}
 		
+		return true;
+	},
+	
+	_IsGuardStateCheckEnabled: function(unit, targetUnit, state, item) {
+		// If the isItemUsable method is called in this method,
+		// the "Guard State" can be enabled only if the unit can use the item.
 		return true;
 	}
 };

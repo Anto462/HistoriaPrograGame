@@ -458,22 +458,6 @@ var MultiClassInfoWindow = defineObject(BaseWindow,
 		this._skillInteraction.checkInitialTopic();
 	},
 	
-	_drawClassGraphics: function(x, y) {
-		var frameIndex, spriteIndex;
-		var animeCoordinates = StructureBuilder.buildAnimeCoordinates();
-		
-		if (this._animeSimple !== null) {
-			frameIndex = 0;
-			spriteIndex = this._animeData.getSpriteIndexFromType(this._motionId, frameIndex, SpriteType.KEY);
-			animeCoordinates.xBase = x + 96;
-			animeCoordinates.yBase = y + 145;
-			this._animeSimple.drawMotion(frameIndex, spriteIndex, this._animeRenderParam, animeCoordinates);
-		}
-		else {
-			UnitRenderer.drawDefaultUnit(this._unit, x + 80, y + 85, this._unitRenderParam);
-		}
-	},
-	
 	_getTargetHandle: function() {
 		var xSrc, ySrc;
 		var handle = this._targetClass.getCharChipResourceHandle();
@@ -490,6 +474,61 @@ var MultiClassInfoWindow = defineObject(BaseWindow,
 	
 	_getMotionId: function() {
 		return MotionIdControl.getWaitId(this._unit, null);
+	},
+	
+	_drawClassGraphics: function(x, y) {
+		if (this._animeSimple !== null) {
+			if (this._isDrawAllSpritesEnabled()) {
+				this._drawAllSprites(x, y);
+			}
+			else {
+				this._drawKeySprite(x, y);
+			}
+		}
+		else {
+			UnitRenderer.drawDefaultUnit(this._unit, x + 80, y + 85, this._unitRenderParam);
+		}
+	},
+	
+	_drawKeySprite: function(x, y) {
+		var frameIndex = 0;
+		var spriteIndex = this._animeData.getSpriteIndexFromType(this._motionId, frameIndex, SpriteType.KEY);
+		var animeCoordinates = StructureBuilder.buildAnimeCoordinates();
+		
+		animeCoordinates.xBase = x + 96;
+		animeCoordinates.yBase = y + 145;
+		this._animeSimple.drawMotion(frameIndex, spriteIndex, this._animeRenderParam, animeCoordinates);
+	},
+	
+	_drawAllSprites: function(x, y) {
+		var i, dx, dy;
+		var frameIndex = 0;
+		var spriteIndex = this._animeData.getSpriteIndexFromType(this._motionId, frameIndex, SpriteType.KEY);
+		var animeCoordinates = StructureBuilder.buildAnimeCoordinates();
+		var keyX = this._animeData.getSpriteX(this._motionId, frameIndex, spriteIndex);
+		var keyY = this._animeData.getSpriteY(this._motionId, frameIndex, spriteIndex);
+		var spriteCount = this._animeData.getSpriteCount(this._motionId, frameIndex);
+		
+		for (i = 0; i < spriteCount; i++) {
+			if (!this._animeData.isSpriteEnabled(this._motionId, frameIndex, i)) {
+				continue;
+			}
+			
+			if (this._animeData.getSpriteType(this._motionId, frameIndex, i) === SpriteType.WEAPON) {
+				continue;
+			}
+			
+			dx = this._animeData.getSpriteX(this._motionId, frameIndex, i) - keyX;
+			dy = this._animeData.getSpriteY(this._motionId, frameIndex, i) - keyY;
+			
+			animeCoordinates.xBase = x + 96 + dx;
+			animeCoordinates.yBase = y + 145 + dy;
+			this._animeSimple.drawMotion(frameIndex, i, this._animeRenderParam, animeCoordinates);
+		}
+	},
+	
+	_isDrawAllSpritesEnabled: function() {
+		return false;
 	}
 }
 );

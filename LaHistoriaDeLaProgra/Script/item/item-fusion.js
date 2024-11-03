@@ -63,6 +63,8 @@ var FusionItemUse = defineObject(BaseItemUse,
 		}
 		
 		FusionControl.catchUnit(itemTargetInfo.unit, itemTargetInfo.targetUnit, fusionData);
+		
+		this._doMetamorphozeAction(fusionData, itemTargetInfo);
 	},
 	
 	getItemAnimePos: function(itemUseParent, animeData) {
@@ -99,6 +101,17 @@ var FusionItemUse = defineObject(BaseItemUse,
 		this._easyMapUnit.setupEvasionMapUnit(targetUnit, true);
 		this._easyMapUnit.startEvasion(targetUnit);
 		targetUnit.setInvisible(true);
+	},
+	
+	_doMetamorphozeAction: function(fusionData, itemTargetInfo) {
+		var metamorphozeData = fusionData.getMetamorphozeData();
+		var unit = itemTargetInfo.unit;
+		
+		if (metamorphozeData === null || MetamorphozeControl.getMetamorphozeData(unit) !== null) {
+			return null;
+		}
+		
+		MetamorphozeControl.startMetamorphoze(unit, metamorphozeData);
 	}
 }
 );

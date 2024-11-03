@@ -160,6 +160,28 @@ var ExtraScrollbar = defineObject(BaseScrollbar,
 }
 );
 
+var ExtraListControl = {
+	createArray: function(list) {
+		var i;
+		var list, data;
+		var count = list.getCount();
+		var arr = [];
+
+		for (i = 0; i < count; i++) {
+			data = list.getData(i);
+			if (this._isDataEnabled(data)) {
+				arr.push(data);
+			}
+		}
+		
+		return arr;
+	},
+
+	_isDataEnabled: function(data) {
+		return true;
+	}
+};
+
 var DictionaryMode = {
 	TOP: 0,
 	MAIN: 1
@@ -383,7 +405,7 @@ var CharacterScreen = defineObject(DictionaryScreen,
 		this._scrollbar.setDictionaryFormation();
 		this._scrollbar.setActive(true);
 		
-		this._scrollbar.setDataList(root.getBaseData().getCharacterDictionaryList());
+		this._scrollbar.setObjectArray(ExtraListControl.createArray(root.getBaseData().getCharacterDictionaryList()));
 		
 		this._storyDataChanger.setConditionData(root.getStoryPreference().isCharacterNumberVisible(), dictionaryScrollbarParam.funcCondition);
 	},
@@ -510,7 +532,7 @@ var WordScreen = defineObject(DictionaryScreen,
 		this._scrollbar.setDictionaryFormation();
 		this._scrollbar.setActive(true);
 		
-		this._scrollbar.setDataList(root.getBaseData().getWordDictionaryList());
+		this._scrollbar.setObjectArray(ExtraListControl.createArray(root.getBaseData().getWordDictionaryList()));
 		
 		this._storyDataChanger.setConditionData(root.getStoryPreference().isWordNumberVisible(), dictionaryScrollbarParam.funcCondition);
 	},
@@ -631,7 +653,7 @@ var GalleryScreen = defineObject(BaseScreen,
 		this._scrollbar.setDictionaryScrollbarParam(dictionaryScrollbarParam);
 		this._scrollbar.setDictionaryFormation();
 		this._scrollbar.setActive(true);
-		this._scrollbar.setDataList(root.getBaseData().getGalleryDictionaryList());
+		this._scrollbar.setObjectArray(ExtraListControl.createArray(root.getBaseData().getGalleryDictionaryList()));
 		
 		this._descriptionChanger.setDescriptionData();
 		this._descriptionChanger.setDescriptionText(this._scrollbar);
@@ -867,7 +889,7 @@ var SoundRoomScreen = defineObject(BaseScreen,
 		this._scrollbar.setDictionaryScrollbarParam(dictionaryScrollbarParam);
 		this._scrollbar.setDictionaryFormation();
 		this._scrollbar.setActive(true);
-		this._scrollbar.setDataList(root.getBaseData().getMediaDictionaryList());
+		this._scrollbar.setObjectArray(ExtraListControl.createArray(root.getBaseData().getMediaDictionaryList()));
 		
 		this._descriptionChanger.setDescriptionData();
 		this._descriptionChanger.setDescriptionText(this._scrollbar);
